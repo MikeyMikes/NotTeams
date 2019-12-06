@@ -1,0 +1,6 @@
+<div class="row">
+    <div class="input-group fixed-bottom offset-3 col-md-8" style="padding: 0">
+        <input type="text" #inputText class="form-control" (keydown)="handleInput($event)" placeholder="Type message"
+        [(ngModel)]="inputMessage" name="inputMessage" aria-label="message" aria-describedby="basic-addon1">
+    </div>
+</div>

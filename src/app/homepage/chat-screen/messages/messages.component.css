@@ -1,0 +1,21 @@
+p {
+    font-size: large;
+    color: white;
+    padding-top: 10px;
+}
+
+.jumbotron {
+    z-index: -1;
+}
+
+.timestamp {
+    color: gray;
+    font-size: small;
+    margin-bottom: 0px;
+    padding-top: 5px;
+}
+
+.username-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

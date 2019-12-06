@@ -1,0 +1,41 @@
+.jumbotron {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    padding-top: 20px;
+}
+
+form {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+}
+
+.img-container {
+    width: 100%;
+    text-align: center;
+}
+
+.img-logo {
+    margin-bottom: 50px;
+}
+
+.submit-btn {
+   background-color: #116466;
+   color: white;
+   width: 100%; 
+   margin-top: 50px;
+}
+
+.make-account-prompt {
+    text-align: center;
+    margin-top: 35px;
+}
+
+.back-btn {
+    margin-bottom: 40px;
+    background-color: #116466;
+    color: white;
+}

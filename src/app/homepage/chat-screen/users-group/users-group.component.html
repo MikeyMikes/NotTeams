@@ -1,0 +1,37 @@
+<div class="jumbotron col-md-2 h-80 fixed-bottom">
+    
+    <form>
+        <div class="row">
+            <div class="input-group mb-3 col-md-10 offset-1" style="text-align: center;">
+                <input type="text" class="form-control" [(ngModel)]="groupToJoin" name="groupToJoin" placeholder="Enter Group" aria-label="Enter Group" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-success" type="button" (click)="joinGroup()" id="button-addon2">Join</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-group col-md-10 offset-1">
+                <select class="custom-select" id="inputGroupSelect04" [(ngModel)]="groupToJoin" name="groupToJoin" aria-label="Example select with button addon">
+                    <option selected>Select Group</option>
+                    <option *ngFor="let group of groups">{{group}}</option>
+                </select>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-success" type="button" (click)="joinGroup()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    
+    <div class="dropdown-divider" style="margin-top: 20px; margin-bottom: 20px;"></div>
+    
+    <h3 class="header">Users in Group</h3>
+
+    <div *ngFor="let user of getUsersInChatGroup()">
+            <div class="row">
+                    <div class="username-text alert alert-light col-md-10 offset-1">
+                        {{user}}
+                    </div>
+            </div> 
+    </div>
+                 
+</div>
