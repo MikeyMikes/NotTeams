@@ -1,0 +1,7 @@
+
+.chat-input-bar {
+    width: calc(90% - 325px);
+    margin-left: calc(5% - 50px);
+    margin-bottom: 12px;
+    z-index: 0;
+}

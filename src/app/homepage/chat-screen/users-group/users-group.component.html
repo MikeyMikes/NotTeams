@@ -1,8 +1,7 @@
-<div class="jumbotron col-md-2 h-80 fixed-bottom">
-    
+<div class="border-right" style="height: 100%; padding-top: 20px; padding-left: 10px;">  
     <form>
-        <div class="row">
-            <div class="input-group mb-3 col-md-10 offset-1" style="text-align: center;">
+        <div class="row" style="margin-bottom: 10px;">
+            <div class="input-group" style="text-align: center; width: 300px; padding-left: 25px; padding-right: 25px;">
                 <input type="text" class="form-control" [(ngModel)]="groupToJoin" name="groupToJoin" placeholder="Enter Group" aria-label="Enter Group" aria-describedby="button-addon2">
                 <div class="input-group-append">
                     <button class="btn btn-outline-success" type="button" (click)="joinGroup()" id="button-addon2">Join</button>
@@ -10,7 +9,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="input-group col-md-10 offset-1">
+            <div class="input-group" style="width: 300px; padding-left: 25px; padding-right: 25px">
                 <select class="custom-select" id="inputGroupSelect04" [(ngModel)]="groupToJoin" name="groupToJoin" aria-label="Example select with button addon">
                     <option selected>Select Group</option>
                     <option *ngFor="let group of groups">{{group}}</option>
@@ -22,16 +21,21 @@
         </div>
     </form>
     
-    <div class="dropdown-divider" style="margin-top: 20px; margin-bottom: 20px;"></div>
+    <div class="dropdown-divider" [ngStyle]="{'stroke': (getUserTheme() == 'Light') ? 'black' : 'white'}"></div>
     
-    <h3 class="header">Users in Group</h3>
+    <h3 class="header" [ngStyle]="{'color': (getUserTheme() == 'Light') ? 'black' : 'white'}">
+        Users in Group {{getCurrentGroupOfUser()}}
+    </h3>
 
     <div *ngFor="let user of getUsersInChatGroup()">
+        <div class="row-container">
             <div class="row">
-                    <div class="username-text alert alert-light col-md-10 offset-1">
+                    <div [className]="(getUserTheme() == 'Light') ? 'username-text alert alert-secondary col-md-10 offset-1' :
+                                      (getUserTheme() == 'Blue') ?  'username-text alert alert-primary col-md-10 offset-1' :
+                                      'username-text alert alert-light col-md-10 offset-1'">
                         {{user}}
                     </div>
             </div> 
+        </div>
     </div>
-                 
-</div>
+</div>              

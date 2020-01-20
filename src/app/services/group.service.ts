@@ -36,7 +36,6 @@ export class GroupService {
   }
 
   getAllGroupsUserBelongsTo(){
-    console.log(this._db.list(firebase.database().ref('Users/' + this._authService.userID + '/Groups/')));
     return this._db.list(firebase.database().ref('Users/' + this._authService.userID + '/Groups/'));
   }
 

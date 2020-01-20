@@ -8,13 +8,17 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private _authService: AuthService) { }
 
   ngOnInit() {
   }
 
   signOut(){
-    this.authService.signOut();
+    this._authService.signOut();
+  }
+
+  getUserTheme() {
+    return this._authService.theme;
   }
 
 }

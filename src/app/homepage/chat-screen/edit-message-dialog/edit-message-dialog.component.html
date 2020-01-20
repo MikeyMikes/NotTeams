@@ -1,0 +1,8 @@
+
+<div class="dialog-container">
+    <mat-form-field class="edit-input">
+        <textarea matInput rows="5" #editInput [(ngModel)]="newMessageText" name="inputMessage"></textarea>
+    </mat-form-field>
+
+    <button mat-raised-button class="edit-button" (click)="editMessage()" (keydown)="handleKeydown($event)" color="primary">Submit</button>
+</div>

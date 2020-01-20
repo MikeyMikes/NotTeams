@@ -1,21 +1,51 @@
+
 <div class="jumbotron">
 
-    <button type="button" class="back-btn btn btn-alert" routerLink="/" routerLinkActive="active"><i class="fas fa-arrow-left"></i></button>
+    <button mat-raised-button class="back-button" color="primary" routerLink="/" routerLinkActive="active"><i class="fas fa-arrow-left"></i></button>
 
-    <form class="was-validated">
-        <div class="form-group">
-            <label for="inputEmail1">Email address</label>
-            <input type="email" class="form-control is-valid" [(ngModel)]="emailInput" name="emailInput" id="inputEmail1" aria-describedby="emailHelp" required>
-        </div>
-        <div class="form-group">
-            <label for="inputPassword1">Password</label>
-            <input type="password" class="form-control" [(ngModel)]="passwordInput" name="passwordInput" id="inputPassword1" required>
-        </div>
-        <div class="form-group">
-            <label for="inputPassword2">Retype Password</label>
-            <input type="password" class="form-control" [(ngModel)]="passwordInput2" name="passwordInput2" id="inputPassword2" required>
-        </div>
-        <button type="submit" class="submit-btn btn btn-alert" (click)="checkValidations()" (keydown)="handleKeydown($event)">Submit</button>
+    <form class="example-form">
+
+        <mat-form-field class="example-full-width" appearance="outline">
+            <input matInput placeholder="Display Name" [formControl]="displayNameFormControl"
+                [(ngModel)]="displaynameInput" name="displaynameInput" [errorStateMatcher]="matcher">
+            <mat-hint>This is the name other users will see.</mat-hint>
+            <mat-error *ngIf="displayNameFormControl.hasError('required')">
+                Display Name is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="outline">
+            <input matInput placeholder="Email" [formControl]="emailFormControl"
+                [(ngModel)]="emailInput" name="emailInput" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                Please enter a valid email address.
+            </mat-error>
+            <mat-error *ngIf="emailFormControl.hasError('required')">
+                Email is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="outline">
+            <input matInput type="password" placeholder="Password" [formControl]="passwordFormControl"
+                [(ngModel)]="passwordInput" name="passwordInput" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="passwordFormControl.hasError('minlength') && !passwordFormControl.hasError('required')">
+                Password must be at least 6 characters.
+            </mat-error>
+            <mat-error *ngIf="passwordFormControl.hasError('required')">
+                Password is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="outline">
+            <input matInput type="password" placeholder="Retype Password" [formControl]="confirmPasswordFormControl"
+                [(ngModel)]="passwordInput2" name="passwordInput2" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="passwordFormControl.hasError('required')">
+                Please retype password.
+            </mat-error>
+        </mat-form-field>    
+
+        <button mat-raised-button class="submit-button" color="primary" (click)="signUp()" (keydown)="handleKeydown($event)">Submit</button>
+
     </form>
 
 </div>

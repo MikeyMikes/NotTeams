@@ -1,0 +1,45 @@
+<div class="jumbotron">
+    <button mat-raised-button color="primary" routerLink="/home" routerLinkActive="active"><i class="fas fa-arrow-left"></i></button>
+
+    <div class="text-center">
+        <img src="{{getUserProfileImage()}}" class="profile-img" alt="...">
+    </div>
+
+    <form class="profile-form">
+        <mat-form-field class="full-width">
+            <input matInput placeholder="Email" disabled value={{getUsername()}}>
+        </mat-form-field>
+        
+        <label for="displaynameInput">Display Name</label>
+        <mat-form-field class="full-width" appearance="outline">
+            <input matInput placeholder={{getDisplayname()}}
+                [(ngModel)]="newDisplayname" name="displaynameInput" id="displaynameInput">
+            <mat-hint>This is the name other users will see.</mat-hint>
+        </mat-form-field>
+
+        <label for="displaynameInput">Theme</label>
+        <select class="custom-select" [(ngModel)]="newTheme" name="newTheme" id="inputGroupSelect01">
+            <option selected>Choose Theme...</option>
+            <option *ngFor="let theme of themes">{{theme}}</option>
+        </select>
+
+        <div class="censor-bad-words-toggle">
+            <mat-slide-toggle
+            class="example-margin"
+            color="primary"
+            [(ngModel)]="censorshipStatus"
+            [checked]="censorshipStatus"
+            name="censorshipStatus">
+                Enable Censoring Swear Words
+            </mat-slide-toggle>
+        </div>
+
+        <div>
+            <label for="file">Profile Image:</label>
+            <input type="file" class="upload-image-button" (change)="upload($event)" accept=".png,.jpg" >
+        </div> 
+
+        <button mat-raised-button type="button" class="submit-button" color="primary" (click)="saveChanges()" (keydown)="handleKeydown($event)">Save</button>
+    </form>
+
+</div>

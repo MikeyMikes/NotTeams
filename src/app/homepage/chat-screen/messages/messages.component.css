@@ -2,10 +2,40 @@ p {
     font-size: large;
     color: white;
     padding-top: 10px;
+    padding-bottom: 10px;
 }
 
-.jumbotron {
-    z-index: -1;
+p:hover {
+    border-color: black;
+}
+
+.message-text {
+    border: 2px solid black;
+    border-radius: 5%;
+    font-size: large;
+    padding: 30px;
+}
+
+.i {
+    font-family: sans-serif;
+}
+
+.users-group {
+    width: 300px; 
+    padding-top: 20px; 
+    float: left;
+}
+
+.mat-card {    
+    height: 90%; 
+    width: 90%;
+    margin-left: 5%;
+    margin-bottom: 12px;
+    z-index: 0;
+    overflow-y: auto; 
+    overflow-x: hidden; 
+    padding-top: 10px;
+    padding-bottom: 40px;
 }
 
 .timestamp {
@@ -18,4 +48,47 @@ p {
 .username-text {
     overflow: hidden;
     text-overflow: ellipsis;
+    width: 10%;
+    width: calc(125px + 1rem);
+    border: 2px solid black;
+    border-radius: 5%;
+    text-align: center;
+}
+
+.tooltip {
+    color: white;
+}
+
+.delete-button {
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 24px;
+}
+
+.edit-button {
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 24px;
+}
+
+.profile-image {
+    border-radius: 50%;
+}
+
+@media only screen and (max-width: 1530px) {
+    .users-group {
+        display: none;
+    }
+}
+
+@media only screen and (min-height: 1100px) {
+    .mat-card {
+        height: 92%;
+    }
+}
+
+@media only screen and (max-height: 600px) {
+    .mat-card {
+        height: 75%;
+    }
 }

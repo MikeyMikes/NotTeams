@@ -1,3 +1,7 @@
+<body [ngStyle]="{'background-image': (getUserTheme() == 'Light') ? 'url(/assets/light.jpg)' : 
+        (getUserTheme() == 'Blue') ? 'url(/assets/blue.jpg)' :
+        'url(/assets/black.jpg)' }">
 <app-navbar></app-navbar>
 
 <app-chat-screen></app-chat-screen>
+</body>

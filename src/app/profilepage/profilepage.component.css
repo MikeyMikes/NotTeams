@@ -1,0 +1,71 @@
+.jumbotron {
+    width: 50%;
+    height: 90%;
+    padding-top: 2rem;
+    margin: auto;
+    margin-top: 3rem;
+}
+
+.profile-img {
+    width: 150px;
+    height: 150px;
+    margin-left: 1rem;
+    border-radius: 50%;
+}
+
+.profile-form {
+    width: 70%;
+    margin: auto;
+    margin-top: 1rem;
+  }
+  
+.full-width {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.submit-button {
+    width: 100%; 
+    margin-top: 50px;
+}
+
+.upload-image-button {
+    margin: 15px;
+}
+
+.upload-image-button .input {
+    border-radius: 50%;
+}
+
+.censor-bad-words-toggle {
+    margin-right: 20px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+@media only screen and (max-height: 1000px) {
+    .submit-button {
+        width: 100%; 
+        margin-top: 30px;
+    }
+}
+
+@media only screen and (min-height: 1100px) {
+    .jumbotron {
+        width: 50%;
+        height: 80%;
+        padding-top: 2rem;
+        margin: auto;
+        margin-top: 3rem;
+    }
+}
+
+@media only screen and (min-height: 1300px) {
+    .jumbotron {
+        width: 50%;
+        height: 70%;
+        padding-top: 2rem;
+        margin: auto;
+        margin-top: 3rem;
+    }
+}

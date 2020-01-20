@@ -1,13 +1,64 @@
-<div #scroller class="jumbotron col-md-8 h-90 offset-3 fixed-bottom overflow-auto" style="background-color: #343a40; height: 85%; padding-bottom: 100;">
 
-        <div *ngFor="let message of _messagingService.messages">
-                <div class="row">
-                        <div [className]="messageBelongsToUser(message) ? 'username-text alert alert-success col-md-2' : 'username-text alert alert-primary col-md-2'">
-                                {{message.user}} 
+<div #scroller class="mat-card fixed-bottom" [ngStyle]="{'background-color': (getUserTheme() == 'Light') ? '#E4E4E4' : 
+                (getUserTheme() == 'Blue') ? '#2F2FA2' : '#343a40' }">
+
+        <div class="sticky-top users-group">
+                <app-users-group></app-users-group>
+        </div>
+        
+        <div *ngFor="let message of getUserMessages()" style="margin-left: 325px;">
+                <i class="far fa-thumbs-up" matTooltip="{{getLikedBy(message.messageID)}}" matTooltipClass="tooltip"
+                        (click)="likeMessage(message.messageID)" [ngStyle]="{'color': 
+                                (getLikeCountForMessage(message.messageID) > 0) ? ((getUserTheme() == 'Blue') ? '#F8E9A1' : '#5680E9')
+                                : (getUserTheme() == 'Light') ? '#282828' : 'white', 'height': '20px', 'margin-left': '20px'}">
+                        {{getLikeCountForMessage(message.messageID)}}
+                </i>
+                <i class="far fa-heart" matTooltip="{{getLovedBy(message.messageID)}}" matTooltipClass="tooltip"
+                        (click)="loveMessage(message.messageID)" [ngStyle]="{'color': 
+                                (getLoveCountForMessage(message.messageID) > 0) ? ((getUserTheme() == 'Blue') ? '#F8E9A1' : '#F64C72')
+                                : (getUserTheme() == 'Light') ? '#282828' : 'white', 'height': '20px', 'margin-left': '15px'}">
+                        {{getLoveCountForMessage(message.messageID)}}
+                </i>
+                <i class="far fa-angry" matTooltip="{{getHatedBy(message.messageID)}}" matTooltipClass="tooltip"
+                        (click)="hateMessage(message.messageID)" [ngStyle]="{'color': 
+                                (getHateCountForMessage(message.messageID) > 0) ? ((getUserTheme() == 'Blue') ? '#F8E9A1' : '#FC4445')
+                                : (getUserTheme() == 'Light') ? '#282828' : 'white', 'height': '20px', 'margin-left': '15px'}">
+                        {{getHateCountForMessage(message.messageID)}}
+                </i>
+
+                <div class="row" style="margin-left: 10px; margin-top: 10px;">
+                        <div [className]="getUserTheme() == 'Light' ? 
+                                (messageBelongsToUser(message) ? 'username-text alert alert-dark shadow-lg p-2' :
+                                'username-text alert alert-dark shadow-lg p-2') :
+                                (messageBelongsToUser(message) ? 'username-text alert alert-dark shadow-lg p-2' :
+                                'username-text alert alert-dark shadow-lg p-2')"
+                        [ngStyle]="{'background-color': (getUserTheme() == 'Light') ? (messageBelongsToUser(message)) ? '#DDDEDF' : '#F4F4F4' : 
+                                (getUserTheme() == 'Blue') ? (messageBelongsToUser(message)) ? '#190061': '#4056CC' : 
+                                (messageBelongsToUser(message)) ? '#111010' : '#282828', 
+                                'color': getUserTheme() == 'Light' ? '#343a40' : '#EEE2DC', 'text-align': 'center' }">
+                                {{message.displayname}}
                                 <p class="timestamp">{{message.timestamp}}</p>
+                                <img src="{{getProfileImgUrl(message.displayname)}}" class="profile-image" width="100" height="100">
                         </div>
-                        <p class="col-md-10">{{message.messageText}}</p>
+
+                        <p class="message-text col-md-9" #messageText
+                        [ngStyle]="{'color': (getUserTheme() == 'Light') ? '#343a40' : '#EEE2DC', 'margin-left': '10px',
+                                'background-color': (getUserTheme() == 'Light') ? (messageBelongsToUser(message)) ? '#DDDEDF' : '#F4F4F4' : 
+                                (getUserTheme() == 'Blue') ? (messageBelongsToUser(message)) ? '#190061': '#4056CC' : 
+                                (messageBelongsToUser(message)) ? '#111010' : '#282828' }">
+                                {{message.messageText}}
+                        </p>
+
+                        <i *ngIf="messageBelongsToUser(message)" class="delete-button fas fa-trash-alt" 
+                                [ngStyle]="{'color': (getUserTheme() == 'Light') ? 'black' : 'white'}"
+                                (click)="openDeleteConfirmationDialog(message.messageID)"></i>
+                        <i *ngIf="messageBelongsToUser(message)" class="edit-button fas fa-pencil-alt" 
+                                [ngStyle]="{'color': (getUserTheme() == 'Light') ? 'black' : 'white'}"
+                                (click)="openEditDialog(message)"></i>
                 </div> 
         </div>
-
+       
+        <div>
+                <app-chat-input></app-chat-input>
+        </div>
 </div>

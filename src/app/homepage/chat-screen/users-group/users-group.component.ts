@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MessagingService } from 'src/app/services/messaging.service';
 import { GroupService } from 'src/app/services/group.service';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-users-group',
@@ -13,7 +14,8 @@ export class UsersGroupComponent implements OnInit {
   groupToJoin;
   groups = new Set();
 
-  constructor(private _db: AngularFireDatabase, private _messagingService: MessagingService, private _groupService: GroupService) { }
+  constructor(private _db: AngularFireDatabase, private _messagingService: MessagingService, private _groupService: GroupService,
+    private _authService: AuthService) { }
 
   ngOnInit() {
     this.getAllGroupsUserBelongsTo();
@@ -39,6 +41,14 @@ export class UsersGroupComponent implements OnInit {
         this.groups.add(group['groupID']);
       })
     });
+  }
+
+  getUserTheme() {
+    return this._authService.theme;
+  }
+
+  getCurrentGroupOfUser() {
+    return this._groupService.currentGroup;
   }
 
 }
