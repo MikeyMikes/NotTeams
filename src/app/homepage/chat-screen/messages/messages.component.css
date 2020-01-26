@@ -71,6 +71,11 @@ p:hover {
     font-size: 24px;
 }
 
+.upvote-button-container {
+    margin-left: 15px;
+    display: inline-block;
+}
+
 .profile-image {
     border-radius: 50%;
 }

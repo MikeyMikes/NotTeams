@@ -8,6 +8,10 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { DeleteConfirmationDialogComponent } from '../delete-confirmation-dialog/delete-confirmation-dialog.component';
 import { EditMessageDialogComponent } from '../edit-message-dialog/edit-message-dialog.component';
 import { UploadService } from 'src/app/services/upload.service';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { take, map, tap } from 'rxjs/operators';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-messages',
@@ -18,9 +22,11 @@ export class MessagesComponent implements OnInit, AfterViewChecked {
 
   @ViewChild('scroller', {static: false}) private chatContainer: ElementRef;
   hover : boolean = false;
+  showVotes : boolean = false;
 
   constructor(private _messagingService: MessagingService, private _authService: AuthService, private _groupService: GroupService,
-    private _db: AngularFireDatabase, private _dialog: MatDialog, private _uploadService: UploadService) { }
+    private _db: AngularFireDatabase, private _dialog: MatDialog, private _uploadService: UploadService, private _angularFireAuth: AngularFireAuth,
+    private _router: Router) { }
 
   ngOnInit() {
     this._messagingService.setRefs();
@@ -127,7 +133,7 @@ export class MessagesComponent implements OnInit, AfterViewChecked {
         })
       }
     })
-    return likedBy.toString().replace(",", "\n");
+    return likedBy.toString().replace(/,/g, "\t");
   }
 
   getLovedBy(id) {
@@ -141,7 +147,7 @@ export class MessagesComponent implements OnInit, AfterViewChecked {
         })
       }
     })
-    return lovedBy.toString().replace(",", "\n");
+    return lovedBy.toString().replace(/,/g, "\t");
   }
 
   getHatedBy(id) {
@@ -155,7 +161,11 @@ export class MessagesComponent implements OnInit, AfterViewChecked {
         })
       }
     })
-    return hatedBy.toString().replace(",", "\n");
+    return hatedBy.toString().replace(/,/g, "\t");
+  }
+
+  setShowVotes(showVotes: boolean) {
+    this.showVotes = showVotes;
   }
 
 }

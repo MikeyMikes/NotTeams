@@ -40,16 +40,14 @@ import {MatButtonModule} from '@angular/material/button';
 import { EditMessageDialogComponent } from './homepage/chat-screen/edit-message-dialog/edit-message-dialog.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { AngularFireStorage } from 'angularfire2/storage';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const appRoutes: Routes = [
+  {path: '', component: LoginpageComponent},
   { path: 'login', component: LoginpageComponent },
   { path: 'signup', component: SignuppageComponent },
   { path: 'home',  component: HomepageComponent, canActivate: [AuthguardService] },
-  { path: 'profile', component: ProfilepageComponent, canActivate: [AuthguardService]},
-  { path: '',
-    redirectTo: '/login',
-    pathMatch: 'full'
-  }
+  { path: 'profile', component: ProfilepageComponent }
 ];
 
 @NgModule({
@@ -93,7 +91,8 @@ const appRoutes: Routes = [
     MatTooltipModule,
     MatDialogModule,
     MatButtonModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    NgbModule
   ],
   providers: [AngularFireStorage],
   entryComponents: [DeleteConfirmationDialogComponent, EditMessageDialogComponent],

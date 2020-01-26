@@ -1,15 +1,16 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UploadService } from './upload.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService implements OnInit{
 
   signedIn: boolean;
   username;
@@ -18,14 +19,17 @@ export class AuthService {
   theme;
   censorshipEnabled;
   profileImg;
+  //currentAuth;
 
   constructor(private _afAuth: AngularFireAuth, private _db: AngularFireDatabase, private router: Router, private _snackBar: MatSnackBar) { }
+  
+  ngOnInit() {
+  }
 
-  signIn(email, password) {
-    this._afAuth.auth.signInWithEmailAndPassword(email, password).then(auth => {
-      this.userID = auth.user.uid;
+  setFields(user: firebase.User) {
+      this.userID = user.uid;
       this.signedIn = true;
-      this.username = auth.user.email;
+      this.username = user.email;
       this.getUserTheme();
       this.getUserProfileImage();
       this.getCensorshipEnabled();
@@ -38,6 +42,13 @@ export class AuthService {
       }).then(function(value) {
         that.router.navigate(['/home']); 
       })
+    
+  }
+
+  signIn(email, password) {
+    this._afAuth.auth.signInWithEmailAndPassword(email, password).then(auth => {
+      //this.currentAuth = auth;
+      this.setFields(auth.user);
     }).catch(e => {
       this._snackBar.open('Error', e, {
         duration: 5000,

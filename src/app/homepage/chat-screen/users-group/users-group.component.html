@@ -2,7 +2,8 @@
     <form>
         <div class="row" style="margin-bottom: 10px;">
             <div class="input-group" style="text-align: center; width: 300px; padding-left: 25px; padding-right: 25px;">
-                <input type="text" class="form-control" [(ngModel)]="groupToJoin" name="groupToJoin" placeholder="Enter Group" aria-label="Enter Group" aria-describedby="button-addon2">
+                <input type="text" class="form-control" [(ngModel)]="groupToJoin" name="groupToJoin" placeholder="Enter Group" 
+                    (keydown)="handleKeydown($event)" aria-label="Enter Group" aria-describedby="button-addon2">
                 <div class="input-group-append">
                     <button class="btn btn-outline-success" type="button" (click)="joinGroup()" id="button-addon2">Join</button>
                 </div>
@@ -23,7 +24,7 @@
     
     <div class="dropdown-divider" [ngStyle]="{'stroke': (getUserTheme() == 'Light') ? 'black' : 'white'}"></div>
     
-    <h3 class="header" [ngStyle]="{'color': (getUserTheme() == 'Light') ? 'black' : 'white'}">
+    <h3 class="header" *ngIf="getCurrentGroupOfUser() != null" [ngStyle]="{'color': (getUserTheme() == 'Light') ? 'black' : 'white'}">
         Users in Group {{getCurrentGroupOfUser()}}
     </h3>
 

@@ -5,26 +5,34 @@
         <div class="sticky-top users-group">
                 <app-users-group></app-users-group>
         </div>
-        
+        <!-- type="button" class="btn btn-outline-secondary mr-2" -->
         <div *ngFor="let message of getUserMessages()" style="margin-left: 325px;">
-                <i class="far fa-thumbs-up" matTooltip="{{getLikedBy(message.messageID)}}" matTooltipClass="tooltip"
-                        (click)="likeMessage(message.messageID)" [ngStyle]="{'color': 
-                                (getLikeCountForMessage(message.messageID) > 0) ? ((getUserTheme() == 'Blue') ? '#F8E9A1' : '#5680E9')
-                                : (getUserTheme() == 'Light') ? '#282828' : 'white', 'height': '20px', 'margin-left': '20px'}">
-                        {{getLikeCountForMessage(message.messageID)}}
-                </i>
-                <i class="far fa-heart" matTooltip="{{getLovedBy(message.messageID)}}" matTooltipClass="tooltip"
-                        (click)="loveMessage(message.messageID)" [ngStyle]="{'color': 
-                                (getLoveCountForMessage(message.messageID) > 0) ? ((getUserTheme() == 'Blue') ? '#F8E9A1' : '#F64C72')
-                                : (getUserTheme() == 'Light') ? '#282828' : 'white', 'height': '20px', 'margin-left': '15px'}">
-                        {{getLoveCountForMessage(message.messageID)}}
-                </i>
-                <i class="far fa-angry" matTooltip="{{getHatedBy(message.messageID)}}" matTooltipClass="tooltip"
-                        (click)="hateMessage(message.messageID)" [ngStyle]="{'color': 
-                                (getHateCountForMessage(message.messageID) > 0) ? ((getUserTheme() == 'Blue') ? '#F8E9A1' : '#FC4445')
-                                : (getUserTheme() == 'Light') ? '#282828' : 'white', 'height': '20px', 'margin-left': '15px'}">
-                        {{getHateCountForMessage(message.messageID)}}
-                </i>
+                <div class="upvote-button-container">
+                        <button mat-raised-button color="primary" style="margin-right: 5px; margin-left: 150px;" (click)="likeMessage(message.messageID)">
+                                <i class="far fa-thumbs-up" 
+                                        [ngStyle]="{'color': (getLikeCountForMessage(message.messageID) > 0) ? '#282828': 'white'}">
+                                        {{getLikeCountForMessage(message.messageID)}}
+                                </i>
+                        </button>
+                        <button mat-raised-button color="accent" style="margin-right: 5px;" (click)="loveMessage(message.messageID)">
+                                <i class="far fa-heart"
+                                        [ngStyle]="{'color': (getLoveCountForMessage(message.messageID) > 0) ? '#282828': 'white'}">
+                                        {{getLoveCountForMessage(message.messageID)}}
+                                </i>
+                        </button>
+                        <button mat-raised-button color="warn" style="margin-right: 5px;" (click)="hateMessage(message.messageID)">
+                                <i class="far fa-angry"
+                                        [ngStyle]="{'color': (getHateCountForMessage(message.messageID) > 0) ? '#282828': 'white'}">
+                                        {{getHateCountForMessage(message.messageID)}}
+                                </i>
+                        </button>
+                </div>
+
+                <button mat-raised-button color="primary" *ngIf="!showVotes" (click)="setShowVotes(true)">Show Votes</button>
+                <button mat-raised-button color="primary" *ngIf="showVotes" (click)="setShowVotes(false)">Hide Votes</button>
+                <p *ngIf="showVotes" style="color: #5680E9; display: inline-block; margin-left: 5px; margin-bottom: 0px; padding: 0px;">{{getLikedBy(message.messageID)}}</p>
+                <p *ngIf="showVotes" style="color: #F64C72; display: inline-block; margin-left: 5px; margin-bottom: 0px; padding: 0px;">{{getLovedBy(message.messageID)}}</p>
+                <p *ngIf="showVotes" style="color: #FC4445; display: inline-block; margin-left: 5px; margin-bottom: 0px; padding: 0px;">{{getHatedBy(message.messageID)}}</p>
 
                 <div class="row" style="margin-left: 10px; margin-top: 10px;">
                         <div [className]="getUserTheme() == 'Light' ? 

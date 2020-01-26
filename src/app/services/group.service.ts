@@ -21,6 +21,7 @@ export class GroupService {
       var groupFound = false;
       
       groups.forEach(group => {
+        console.log("GROUP TO JOIN " + groupToJoin)
         if(group['groupID'] == groupToJoin){
           groupFound = true;
           this.currentGroup = groupToJoin;

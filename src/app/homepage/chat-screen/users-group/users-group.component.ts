@@ -51,4 +51,10 @@ export class UsersGroupComponent implements OnInit {
     return this._groupService.currentGroup;
   }
 
+  handleKeydown(event) {
+    if(event.keyCode == 13) {
+      this.joinGroup();
+    }
+  }
+
 }
